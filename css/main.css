@@ -1,0 +1,10 @@
+.itemBox {
+  display: inline-block;
+  border-style: solid;
+  border-width: 25px;
+  border-image-source: url('itemBackground.png');
+  border-image-slice: 50 fill;
+  border-image-repeat: stretch;
+  color: #fff;
+  font-size: 40px;
+}
