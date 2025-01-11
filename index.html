@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/mcColors.css">
   <head>
     <title>Item Editor</title>
   </head>
   <body>
-    <div class="itemBox">
-      Buuhhhh<br>This item is amazing<br>Buhhhh
+    <div class="menuBar">
+      <button>Debug</button>
+      <button>Debug</button>
+      <button>Debug</button>
+      <button id="guiScale">GUI Scale : Auto</button>
     </div>
+    <div class="mainViewport cBlackstoneBg">
+      <div class="splitScreen toTheLeft itemSettings cBlackstoneBg">
+        <textarea id="simpleInput"></textarea>
+      </div>
+      <div class="splitScreen toTheRight itemBg">
+         <div id="itemDisplay" class="itemBox">
+          <p id="itemDisplayName">Very cool item</p>
+          <p class="nameLoreSeperator"></p>
+          <p id="itemDisplayLore">Cool item<br>WOW</p>
+        </div>
+      </div>
+    </div>
+    <script src="./js/menuBar.js"></script>
+    <script src="./js/itemSettings.js"></script>
   </body>
 </html>
