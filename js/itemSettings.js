@@ -22,8 +22,7 @@ let validAmpersandCodes = {
 	"n":{class:"mcUnderline",overwrites:false},
 	"o":{class:"mcItalic",overwrites:false},
 }
-document.getElementById("simpleInput").value = "Test Item\nThis item is a default\nexample of how to use\nthis program.\n\nIf you want color, use \nthe and symbol, &clike this!\nTo make a new line\njust hit enter"
-
+let defaultString = "Test Item\nThis item is a default\nexample of how to use\nthis program.\n\nIf you want color, use \nthe and symbol, &clike this!\nTo make a new line\njust hit enter"
 document.getElementById("simpleInput").addEventListener('input', function(e) {
 	updateItemPreview(e.target.value.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"))
 })
@@ -57,3 +56,7 @@ function updateItemPreview(text){
 		document.getElementById("itemDisplayLore").innerHTML+=stringToColorParsed(split[i])+"<br>"
 	}
 }
+window.addEventListener("load", (e) => {
+	document.getElementById("simpleInput").value = defaultString
+	updateItemPreview(defaultString.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"))
+});
