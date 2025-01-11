@@ -22,27 +22,34 @@ let validAmpersandCodes = {
 	"n":{class:"mcUnderline",overwrites:false},
 	"o":{class:"mcItalic",overwrites:false},
 }
+let selectedItem = ""
 let defaultString = "Test Item\nThis item is a default\nexample of how to use\nthis program.\n\nIf you want color, use \nthe and symbol, &clike this!\nTo make a new line\njust hit enter"
+let inputValue = defaultString
 document.getElementById("simpleInput").addEventListener('input', function(e) {
-	updateItemPreview(e.target.value.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"))
+	inputValue = e.target.value
+	updateItemPreview(inputValue)
+	updateItemOutput(inputValue)
+
 })
 function stringToColorParsed(string){
 	let sections = string.split("&")
 	if(sections.length<=1){
-		return string
+		return sanit(string)
 	}
-	let rebuilt = sections[0]
+	let rebuilt = sanit(sections[0])
 	let activeLayers = 0;
 	for (let i = 1;i < sections.length;i++){
 		if(validAmpersandCodes[sections[i][0]]!=undefined){
 			let value = validAmpersandCodes[sections[i][0]]
 			if(value.overwrites==true){
-				rebuilt+=("</span>").repeat(activeLayers)+`<span class="${value.class}">${sections[i].substring(1,sections[i].length)}`
+				rebuilt+=("</span>").repeat(activeLayers)+`<span class="${value.class}">${sanit(sections[i].substring(1,sections[i].length))}`
 				activeLayers=1
 			}else{
-				rebuilt+=`<span class="${value.class}">${sections[i].substring(1,sections[i].length)}`
+				rebuilt+=`<span class="${value.class}">${sanit(sections[i].substring(1,sections[i].length))}`
 				activeLayers++
 			}
+		}else{
+			rebuilt+="&"+sanit(sections[i])
 		}
 	}
 	return rebuilt+("</span>").repeat(activeLayers)
@@ -56,7 +63,22 @@ function updateItemPreview(text){
 		document.getElementById("itemDisplayLore").innerHTML+=stringToColorParsed(split[i])+"<br>"
 	}
 }
+
 window.addEventListener("load", (e) => {
 	document.getElementById("simpleInput").value = defaultString
-	updateItemPreview(defaultString.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"))
+	updateItemPreview(defaultString)
+	let dropdown = idHand.createItemDropdown({type:"items",change:itemChanged})
+	document.getElementById('inputs').appendChild(dropdown);
+	selectedItem=dropdown.value
 });
+function itemChanged(newItem) {
+	selectedItem=newItem.target.value
+	updateItemOutput(inputValue)
+}
+
+function sanit(str) {
+	return str.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+}
+function updateItemOutput(itemData) {
+	document.getElementById("output").value = conversion.auto({src:conversion.selected.from.id,dst:conversion.selected.to.id,dat:itemData,item:selectedItem})
+}
