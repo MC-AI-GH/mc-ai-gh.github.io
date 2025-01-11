@@ -7,14 +7,16 @@
   </head>
   <body>
     <div class="menuBar">
-      <button>Debug</button>
-      <button>Debug</button>
-      <button>Debug</button>
+      <button id="changeEditor">Debug</button>
+      <button id="changeOutput">Debug</button>
       <button id="guiScale">GUI Scale : Auto</button>
     </div>
     <div class="mainViewport cBlackstoneBg">
       <div class="splitScreen toTheLeft itemSettings cBlackstoneBg">
-        <textarea style="width:25%;height:25%;" id="simpleInput"></textarea>
+        <div id ="inputs">
+          <textarea style="width:100%;height:25%;" id="simpleInput"></textarea>
+        </div>
+        <textarea style="width:100%;height:25%;" id="output" readonly></textarea>
       </div>
       <div class="splitScreen toTheRight itemBg">
          <div id="itemDisplay" class="itemBox">
@@ -24,6 +26,8 @@
         </div>
       </div>
     </div>
+    <script src="./js/idHand.js"></script>
+    <script src="./js/itemConversion.js"></script>
     <script src="./js/menuBar.js"></script>
     <script src="./js/itemSettings.js"></script>
   </body>
