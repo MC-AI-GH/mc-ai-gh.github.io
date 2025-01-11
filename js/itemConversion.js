@@ -20,8 +20,6 @@ window.conversion = {
             return JSON.stringify(inp)
         },
         act: function(inp){
-            //let oldInfo = idHand.toOld(inp.id)
-            //return `${oldInfo.id} ${inp.Count!=undefined? inp.Count : 1} ${oldInfo.extra} ${JSON.stringify(inp.tag)}`
             //Coming soon
         },
         "1.20.4": function(inp){
