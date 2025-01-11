@@ -1,10 +1,113 @@
 .itemBox {
-  display: inline-block;
-  border-style: solid;
-  border-width: 25px;
-  border-image-source: url('../images/itemBackground.png');
-  border-image-slice: 50 fill;
-  border-image-repeat: stretch;
-  color: #fff;
-  font-size: 40px;
+  	padding-left: 1%;
+  	display: inline-block;
+  	border-style: solid;
+  	border-width: 25px;
+  	border-image-source: url('../images/itemBackground.png');
+  	border-image-slice: 50 fill;
+  	border-image-repeat: stretch;
+  	color: #fff;
+  	font-size: 40px;
+  	font-family: "Courier New", Courier, monospace;
+  	overflow: scroll;
+  	scrollbar-width: none;
+  	max-height: 75%;
+  	max-width: 90%;
+  	white-space: nowrap;
+  	line-height: 52px;
+
 }
+.itemBox::-webkit-scrollbar{
+	display: none;
+}
+.itemBox[data-GUIScale="1"]{
+  	border-image-slice: 199 fill;
+  	font-size: 8px;
+  	line-height: 11px;
+}
+.itemBox[data-GUIScale="2"]{
+  	border-image-slice: 150 fill;
+  	font-size: 10px;
+  	line-height: 16px;
+}
+.itemBox[data-GUIScale="3"]{
+  	border-image-slice: 125 fill;
+  	font-size: 12px;
+  	line-height: 21px;
+}
+.itemBox[data-GUIScale="4"]{
+  	border-image-slice: 100 fill;
+  	font-size: 16px;
+  	line-height: 24px;
+}
+.itemBox p{
+	    display: inline;
+}
+.splitScreen{
+  	height: 100%;
+  	width: 50%;
+  	position: fixed;
+  	top: 0;
+  	padding-top: calc( 4% + 7px );
+}
+.toTheLeft{
+  	left: 0;
+}
+.toTheRight{
+  	right: 0;
+}
+.cBlackstoneBg{
+  	background-image: url(../images/bg/cBlackstone.png);
+  	background-repeat: repeat;
+  	image-rendering: pixelated;
+  	background-size: 100px 100px
+}
+.mainViewport{
+	top: 0;
+}
+.itemBg{
+
+	background-color: #1f121b;
+}
+.itemBox .nameLoreSeperator{
+	font-size: 2px;
+	line-height: 2px;
+}
+.itemBox[data-GUIScale="1"] .nameLoreSeperator{
+	font-size: 1px;
+	line-height: 1px;
+}
+.menuBar{
+	background-color: #1e1c23;
+	border-bottom: 7px solid #13110e;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 5%;
+	position: fixed;
+	z-index: 9999;
+}
+button{
+  	background-color: #3c3947;
+  	font-family: "Courier New", Courier, monospace;
+  	color: #fff;
+}
+.menuBar button{
+	height:  100%;
+	max-width: 25%;
+}
+
+input,textarea{
+    overflow-y: scroll;
+  	background-color: #3c3947;
+  	font-family: "Courier New", Courier, monospace;
+  	color: #fff;
+}
+
+textarea{
+	border: none;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+  resize: both;
+}
+
