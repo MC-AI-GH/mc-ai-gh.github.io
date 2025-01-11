@@ -1,4 +1,4 @@
-let validAmpersandCodes = {
+let validAmpersandCodes = { 
 	"0":{class:"color0",overwrites:true},
 	"1":{class:"color1",overwrites:true},
 	"2":{class:"color2",overwrites:true},
