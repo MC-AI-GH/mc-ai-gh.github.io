@@ -1,0 +1,84 @@
+
+.color0{
+	color: #000;
+}
+.color1{
+	color: #0000AA;
+}
+.color2{
+	color: #00AA00;
+}
+.color3{
+	color: #00AAAA;
+}
+.color4{
+	color: #AA0000;
+}
+.color5{
+	color: #AA00AA;
+}
+.color6{
+	color: #FFAA00;
+}
+.color7{
+	color: #AAAAAA;
+}
+.color8{
+	color: #555555;
+}
+.color9{
+	color: #5555FF;
+}
+.colorA{
+	color: #55FF55;
+}
+.colorB{
+	color: #55FFFF;
+}
+.colorC{
+	color: #FF5555;
+}
+.colorD{
+	color: #FF55FF;
+}
+.colorE{
+	color: #ffff55;
+}
+.colorF{
+	color: #fff;
+}
+.mcDefault{
+	color: #AAAAAA;
+}
+@keyframes obfuscate {
+	0% {
+    	color: inherit;
+  	}
+  	50% {
+    	color: #AAAAAA;
+  	}
+  	75% {
+    	color: #555555;
+  	}
+}
+.mcObfuscated{
+	animation: obfuscate 1s infinite steps(1);
+	color: inherit;
+}
+.mcBold{
+	font-weight: bold;
+	color: inherit;
+}
+.mcStrike{
+	text-decoration: line-through;
+	color: inherit;
+}
+.mcUnderline{
+	text-decoration: underline;
+	color: inherit;
+}
+.mcItalic{
+	font-style: italic;
+	color: inherit;
+}
+
