@@ -1,4 +1,4 @@
-let settings = {
+let settings = { 
 	guiScale:4,
 	editorTypeInd:0,
 	outputTypeInd:0
