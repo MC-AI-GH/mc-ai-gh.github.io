@@ -97,8 +97,8 @@ button{
 	max-width: 25%;
 }
 
-input,textarea{
-    overflow-y: scroll;
+input,textarea,select{
+  	overflow-y: scroll;
   	background-color: #3c3947;
   	font-family: "Courier New", Courier, monospace;
   	color: #fff;
@@ -108,6 +108,6 @@ textarea{
 	border: none;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
-  resize: both;
+  	resize: both;
 }
 
