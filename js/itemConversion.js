@@ -17,39 +17,56 @@ window.conversion = {
     },
     to: {
         item: function(inp){
-            return JSON.stringify(inp)
+            return JSON.stringify(inp.data)
         },
         act: function(inp){
+            //let oldInfo = idHand.toOld(inp.id)
+            //return `${oldInfo.id} ${inp.Count!=undefined? inp.Count : 1} ${oldInfo.extra} ${JSON.stringify(inp.tag)}`
             //Coming soon
         },
         "1.20.4": function(inp){
 
-            return `/give @p ${inp.id}${JSON.stringify(inp.tag)}`
+            return `/give @p ${inp.data.id}${JSON.stringify(inp.data.tag)}`
         },
         "1.21": function(inp){
             let componentTmp = ""
-            if(inp.tag.display.Name){
-                componentTmp+=`custom_name='${inp.tag.display.Name.replace(/\\u([a-zA-Z0-9]{4})/g, (whole, hex)=>{return `\\\\u${hex}`})}',`
+            if(inp.display.name){
+                componentTmp+=`custom_name='${inp.display.name}',`
             }
-            if(inp.tag.display.Lore){
-                componentTmp+=`lore=[${inp.tag.display.Lore.map(line => `'${line.replace(/\\u([a-zA-Z0-9]{4})/g, (whole, hex)=>{return `\\\\u${hex}`})}'`).join(",")}],`
+            if(inp.display.lore){
+                componentTmp+=`lore=[${inp.display.lore.map(line => `'${line}'`).join(",")}],`
             }
-            return `/give @p ${inp.id}[${componentTmp}]`
+            return `/give @p ${inp.data.id}[${componentTmp}]`
         },
+        "1.21_alt": function(inp){
+            let componentTmp = ""
+            if(inp.display.name){
+                componentTmp+=`custom_name='${inp.display.name}',`
+            }
+            if(inp.display.lore){
+                componentTmp+=`lore=[${inp.display.lore.map(line => `{extra: ["${line}"], text: "", italic: 0b}`).join(",")}],`
+            }
+            return `/give @p ${inp.data.id}[${componentTmp}]`
+        }
     },
     from: {
     	basic: function(inp){
     		let sections = inp.split("\n")
-    		let outp = {Count:1,id:conversion.itemType,tag:{display:{Lore:[],Name:sections[0].length>0?`{"italic":false,"extra":[{"text":"${sections[0].replace(/&([a-zA-Z0-9])/g,(whole,color)=>{return `\\u00a7${color}`}).replace(/\"/g,`\\u0022`)}"}],"text":""}`:null}}}
-    		for(let i = 1; i < sections.length; i++){
-    			outp.tag.display.Lore.push(`{"italic":false,"extra":[{"text":"${sections[i].replace(/&([a-zA-Z0-9])/g,(whole,color)=>{return `\\u00a7${color}`}).replace(/\"/g,`\\u0022`)}"}],"text":""}`)
-    		}
-            if (outp.tag.display.Name==null){
-                delete outp.tag.display.Name
+    		let outp = {
+                    data:{Count:1,id:conversion.itemType,tag:{display:{Lore:[],Name:sections[0].length>0?`{"italic":false,"extra":[{"text":"${sections[0].replace(/&([a-zA-Z0-9])/g,(whole,color)=>{return `\\u00a7${color}`}).replace(/\"/g,`\\u0022`)}"}],"text":""}`:null}}},
+                    display:{name:sections[0].replace(/\\/g,"\\\\").replace(/(?<!\\)&([0-9a-fk-or])/gi,"\\u00A7$1").replace(/\\&([0-9a-fk-or])/gi, "&$1").replace(/'/g,"\\'"),lore:[]}
+                }
+            for(let i = 1; i < sections.length; i++){
+    		  outp.data.tag.display.Lore.push(`{"italic":false,"extra":[{"text":"${sections[i].replace(/&([a-zA-Z0-9])/g,(whole,color)=>{return `\\u00a7${color}`}).replace(/\"/g,`\\u0022`)}"}],"text":""}`)
+    		  outp.display.lore.push(sections[i].replace(/\\/g,"\\\\").replace(/(?<!\\)&([0-9a-fk-or])/gi,"\\u00A7$1").replace(/\\&([0-9a-fk-or])/gi, "&$1").replace(/'/g,"\\'"))
             }
-            if (outp.tag.display.Lore.length==0){
-                delete outp.tag.display.Lore
+            if (outp.data.tag.display.Name==null){
+                delete outp.data.tag.display.Name
             }
+            if (outp.data.tag.display.Lore.length==0){
+                delete outp.data.tag.display.Lore
+            }
+            console.log(outp)
     		return outp
 
     	}
@@ -58,7 +75,8 @@ window.conversion = {
         to:[
             {id:"item",display:"Item Data"},
             {id:"1.20.4",display:"Tags(1.13?-1.20.4)"},
-            {id:"1.21",display:"Components(1.20.5+)"}
+            {id:"1.21",display:"Components(1.20.5+)"},
+            {id:"1.21_alt",display:"Components Hypixelified"}
         ],
         from:[
             {id:"basic",display:"Basic"}
